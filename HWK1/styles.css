@@ -1,0 +1,22 @@
+#banner{
+    background-color: #1abc9c;
+}
+
+.navbar{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 0px;
+    border: 0;
+    border-radius: 0;
+    font-size: 20px;
+    letter-spacing: 1px;
+    background-color: #474447;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #FFFFFF;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #FFFFFF;
+}
