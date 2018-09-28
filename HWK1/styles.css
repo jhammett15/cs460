@@ -1,3 +1,12 @@
+html{
+    height: 100vh;
+}
+
+body{
+    height: 100vh;
+    border: none;
+}
+
 #banner{
     background-color: #1abc9c;
 }
@@ -8,7 +17,7 @@
     margin-bottom: 0px;
     border: 0;
     border-radius: 0;
-    font-size: 20px;
+    font-size: 25px;
     letter-spacing: 1px;
     background-color: #474447;
 }
@@ -20,3 +29,23 @@
 .navbar-default .navbar-nav > li > a:focus {
     color: #FFFFFF;
 }
+
+.content{
+    padding-left: 10px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: skyblue;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.p{
+    font-size: 20px;
+}
+
+.container-fluid .row .col-md-6{
+    height: 100vh;
+    overflow: auto;
+}
+
