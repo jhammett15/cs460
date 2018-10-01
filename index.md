@@ -1,5 +1,5 @@
-# CS 460 Homework
-This page functions as the repository for my GitHub Pages. It contains the demos and journal posts for the homeworks in CS 460.
+# Jerika Hammett's CS 460 Homework
+This page contains the demos and journal posts for the homeworks in CS 460: Software Engineering I.
 
 [Here is a link to my code repository.](https://github.com/jhammett15/jhammett15.github.io)
 

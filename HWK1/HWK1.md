@@ -39,7 +39,7 @@ Once that was done I made a plan for my website. I had a surprisingly hard time 
 
 Once I had my plan I created the necessary files, leaving them blank until I had a navbar up and running on the home page. That way I could just copy the boilerplate code with the opening and closing tags, bootstrap code, and navbar code into all the other files. I had a lot more trouble with the navbar than I had expected to. I put the navbar in a div, and put another div in the navbar, in which I put an unordered list with the links. I got the links working fine, but for some reason they all wanted to stack vertically and I still don't know why. Eventually I put the list items into buttons and they sat horizontally next to each other.
 
-Once I had the navbar up and running I copied the outline into all the other files.
+Once I had the navbar up and running I copied the outline into all the other files and did my first real commit to Github.
 
 ```html
 <!DOCTYPE html>
@@ -81,6 +81,15 @@ Once I had the navbar up and running I copied the outline into all the other fil
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </body>
 </html>
+```
+
+```
+git add .
+git status
+git commit -m "Initial commit. Created base files with boilerplate code"
+git push origin master
+git status
+
 ```
 
 There were several individual requirements for the webpage. The table I put on the Author page in a single column layout.
@@ -174,3 +183,43 @@ The two kinds of lists I used were an unordered list in the navbar (see above fo
 
 ## CSS
 
+I kept the CSS pretty simple for my webiste. I imported the style sheet with a link in the head of the document.
+
+```html
+<link rel="stylesheet" type="text/css" href="styles.css">
+```
+
+I didn't play around with fonts, but I did change the colors, specifically of the banner, the navbar, and the content section. I also set the font sizes, and the padding around the content section. 
+```css
+body{
+    height: 100vh;
+    border: none;
+}
+
+#banner{
+    background-color: #1abc9c;
+}
+
+.navbar{
+    padding-top: 5px;
+    padding-bottom: 10px;
+    font-size: 25px;
+    letter-spacing: 1px;
+    background-color: #474447;
+}
+
+
+.content{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: skyblue;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.p{
+    font-size: 20px;
+}
+```
