@@ -1,5 +1,7 @@
 # Homework 1 
 
+[Repository](https://github.com/jhammett15/jhammett15.github.io) | [Demo](https://jhammett.github.io)
+
 This was the first homework for CS 460: Software Engineering, in which we learned the basics of HTML and CSS through creating a simple website. We used Bootstrap for our base library, which is a popular CSS and Javascript library for page layouts. 
 
 We used the command line version of Git as a means of version control, linked to a remote repository on Github.
