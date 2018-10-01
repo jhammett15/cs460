@@ -21,7 +21,7 @@ It probably would have been easier to create the repository on Github and then c
 
 At this point I hadn't created any files, I only had an empty folder.
 
-## Webpage
+## HTML
 
 I learned the basics of HTML several years ago, so I knew about opening and closing tags, but that was about it for my experience. I didn't remember anything about CSS other than that it was used for styling, and I didn't know what Bootstrap was at all. I started out by downloading the files for Bootstrap and making sure it was running properly. I went [here](http://getbootstrap.com/) to download the files, then to the Get Started page to learn how to make it work. There were several links I needed to copy into my file, one link copied into the head, and three scripts into the bottom of the body. 
 
@@ -80,3 +80,95 @@ Once I had the navbar up and running I copied the outline into all the other fil
     </body>
 </html>
 ```
+
+There were several individual requirements for the webpage. The table I put on the Author page in a single column layout.
+
+```html
+<div class="container">
+    <div class="content">
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Site</th>
+                            <th scope="col">Link/Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Github</td>
+                            <td><a href="https://github.com/jhammett15" target="_blank">github.com/jhammett15</a></td>
+                        </tr>
+                        <tr>
+                            <td>BitBucket</td>
+                            <td><a href="https://bitbucket.org/jhammett15/" target="_blank">bitbucket.org/jhammett15/</a></td>
+                        </tr>
+                        <tr>
+                            <td>Facebook</td>
+                            <td><a href="https://www.facebook.com/jerika.hammett" target="_blank">facebook.com/jerika.hammett</a></td>
+                        </tr>
+                        <tr>
+                            <td>School Email</td>
+                            <td>jhammett15@wou.edu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+The two kinds of lists I used were an unordered list in the navbar (see above for example code), and a description list onthe Games page.
+```html
+<dl>
+    <dt>Rimworld</dt>
+    <dd>
+        <div class="row">
+        <div class="col">
+          <img src="rimworld.jpg" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col">
+          <p>Rimworld is a colony management game driven by an intelligent storyteller. The character traits and behaviors are extremely diverse and they play amusingly with each other. I've played this game a bit but it's the sort that can and will suck your life away so I purposefully havent dove too far in yet. I would very much like to.</p>
+        </div>
+    </dd>
+
+    <dt>Oblvion</dt>
+    <dd>
+        <div class="row">
+        <div class="col">
+          <img src="oblivion.jpg" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col">
+          <p>Skyrim is just about my favorite RPG of all time. I obsessively played it until there was nothing left to do, an impossible task. Considering Oblivion is its precursor, and is said to be better in just about every way but graphics, I would really like to play this game. I even have it. It's sitting on my bookshelf. Mocking me.</p>
+        </div>
+    </dd>    
+
+    <dt>Shadow of Mordor</dt>
+    <dd>
+        <div class="row">
+        <div class="col">
+          <img src="shadowofmordor.jpg" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col">
+          <p>This game is set in Middle Earth, so it already has that going for it. I would play it for that even if it wasn't amazing. The main character is both a ranger <em>and</em> a wraith. These are my two favorite types of characters. The gameplay and graphics are amazing, and I'm practically drooling over this game, I just don't want to distract myself from school.</p>
+        </div>
+    </dd>   
+
+    <dt>Kingdom Hearts</dt>
+    <dd>
+        <div class="row">
+        <div class="col">
+          <img src="kingdomhearts.jpg" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col">
+          Kingdom Hearts was the series that got me addicted to gaming in the first place. I started out with the Re:Coded game for the Nintendo DS and never looked back. I would play any and all of these games for the rest of my life and if the studio would stop taunting us with Kingdom Hearts III I would be a very happy person.
+        </div>
+    </dd>   
+
+</dl>
+```
+
+## CSS
+
