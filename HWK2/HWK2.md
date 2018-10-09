@@ -10,4 +10,4 @@ I decided to add a page onto my website from Homework 1. This way I already had 
 
 I figured it would look something like this.
 
-![planning image](images/plan.png)
+![planning image](images/plan.PNG)
