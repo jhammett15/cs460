@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HWK3
 {
-    class Class1
+    class LinkedQueue
     {
     }
 }

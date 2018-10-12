@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace HWK3
 {
-    class Class1
+    class Main
     {
+        static void Main(string[] args)
+        {
+        }
     }
 }

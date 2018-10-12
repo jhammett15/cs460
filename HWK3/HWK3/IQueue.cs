@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace HWK3
 {
-    class Program
+    class IQueue
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }
