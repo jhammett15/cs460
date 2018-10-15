@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HWK3
 {
-    public class QueueUnderflowException
+    public class QueueUnderflowException : SystemException
     {
         // empty constructor, creates an exception without a message
         public QueueUnderflowException()
