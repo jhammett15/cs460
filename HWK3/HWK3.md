@@ -561,3 +561,29 @@ namespace HWK3
     }
 }
 ```
+
+## Results
+
+In the end the results were mostly the same as the Java program. When the program was run as intended, they were the same.
+
+Java:
+![working correctly](HWK3/images/JavaCorrectly.PNG)
+
+C#:
+![working correctly](HWK3/images/C#Correctly.PNG)
+
+They also both threw error messages, albeit different ones when given a parameter of less than 1.
+
+Java:
+![LT1](HWK3/images/JavaLT1.PNG)
+
+C#:
+![LT1](HWK3/images/C#LT1.PNG)
+
+Where they differed was in the Main method where they were given a larger larger than an int that threw a NumberFormatException (Java) or a FormatException (C#). In the Java file, it worked as intended, it displayed the message it was supposed to. In the C# file, it simply gave an error message and a stack trace.
+
+Java:
+![really big](HWK3/images/JavaReallyBig.PNG)
+
+C#:
+![really big](HWK3/images/C#ReallyBig.PNG)
