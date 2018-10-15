@@ -6,18 +6,30 @@ using System.Threading.Tasks;
 
 namespace HWK3
 {
+    /// <summary>
+    /// A FIFO queue interface. This is suitable for a singly linked queue
+    /// </summary>
+    /// <typeparam name="T">Specifies that the Queue that inherits from this will take in a generic type</typeparam>
     public interface IQueue<T>
     {
-        // adds an element to the rear of the queue
-        // returns the element that was enqueued
+        /// <summary>
+        /// adds an element to the rear of the queue
+        /// </summary>
+        /// <param name="element">the item to be enqueued</param>
+        /// <returns>returns the element that was enqueued</returns>
         T Push(T element);
 
-        // removes and returns the front element
-        // exception thrown if the queue is empty
+        /// <summary>
+        /// removes and returns the front element
+        /// exception thrown if the queue is empty
+        /// </summary>
+        /// <returns>the element taht was at the front of the queue</returns>
         T Pop();
 
-        // test if the queue is empty
-        // return true if the queue is empty, otherwise false
+        /// <summary>
+        /// test if the queue is empty
+        /// </summary>
+        /// <returns>teturn true if the queue is empty, otherwise false</returns>
         bool IsEmpty();
     }
 }
