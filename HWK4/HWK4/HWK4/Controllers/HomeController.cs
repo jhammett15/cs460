@@ -13,7 +13,7 @@ namespace HWK4.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult MileConverter()
         {
             ViewBag.Message = "Your application description page.";
 
