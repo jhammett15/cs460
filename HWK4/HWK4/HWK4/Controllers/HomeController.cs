@@ -9,7 +9,7 @@ namespace HWK4.Controllers
 {
     public class HomeController : Controller
     {
-        private double mi;
+        private double? mi;
         private string measurement;
         private string result;
 
@@ -24,10 +24,9 @@ namespace HWK4.Controllers
             Debug.WriteLine(Request.QueryString["miles"]);
             Debug.WriteLine(Request.QueryString["units"]);
 
-
             mi = Convert.ToDouble(Request.QueryString["miles"]);
             measurement = Request.QueryString["units"];
-            double total = 1;
+            double? total;
 
             if(measurement == "millimeters")
             {
