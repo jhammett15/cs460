@@ -3,5 +3,36 @@
     ViewBag.Title = "MileConverter";
 }
 
-<h2>MileConverter</h2>
+<h2>Convert Miles to Metric</h2>
+
+<form action="/Home/MileConverter" method="get">
+    <div class="container-fluid">
+        <div class="content">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4><strong>Miles</strong></h4>
+                    <input id="miles" type="number" name="miles", min="0" , step="any" />
+                </div>
+                <div class="col-md-4">
+                    <h3>Select a unit</h3>
+                    <div class="radio" id="units">
+                        <label for="milli">@Html.RadioButton("units", "millimeters", new { id = "milli" }) millimeters</label>
+                        <label for="centi">@Html.RadioButton("units", "centimeters", new { id = "centi" }) centimeters</label>
+                        <label for="m">@Html.RadioButton("units", "meters", new { id = "m" }) meters</label>
+                        <label for="kilo">@Html.RadioButton("units", "kilometers", new { id = "kilo" }) kilometers</label>                        
+                    </div>
+                    <input type="submit" />
+                </div>
+                <div>
+                    @if (ViewBag.mi != null && ViewBag.measurement != null)
+                    {
+                        <p>@ViewBag.result</p>
+                    }
+                </div>
+            </div>
+        </div>        
+    </div>
+    
+    
+</form>
 
