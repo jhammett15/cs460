@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.square {
+    height: 100px;
+    width: 100px;
+    background-color: #555;
+}
