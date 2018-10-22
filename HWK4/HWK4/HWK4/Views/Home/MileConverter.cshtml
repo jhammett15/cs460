@@ -15,19 +15,23 @@
                 </div>
                 <div class="col-md-4">
                     <h3>Select a unit</h3>
-                    <div class="radio" id="units">
-                        <label for="milli">@Html.RadioButton("units", "millimeters", new { id = "milli" }) millimeters</label>
-                        <label for="centi">@Html.RadioButton("units", "centimeters", new { id = "centi" }) centimeters</label>
-                        <label for="m">@Html.RadioButton("units", "meters", new { id = "m" }) meters</label>
-                        <label for="kilo">@Html.RadioButton("units", "kilometers", new { id = "kilo" }) kilometers</label>                        
+                    <div class="radio">
+                        <label><input id="1" type="radio" name="units" value="millimeters" checked/>millimeters</label> <br />
+                        <label><input id="2" type="radio" name="units" value="centimeters"/>centimeters</label> <br />
+                        <label><input id="3" type="radio" name="units" value="meters"/>meters</label> <br />
+                        <label><input id="4" type="radio" name="units" value="kilometers"/>kilometers</label> <br />
                     </div>
-                    <input type="submit" />
-                </div>
-                <div>
-                    @if (ViewBag.mi != null && ViewBag.measurement != null)
-                    {
-                        <p>@ViewBag.result</p>
-                    }
+                    <input type="submit" value="Convert"/>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        @if (ViewBag.measurement != null)
+                        {
+                            <p><h3 id="milesConverted"><strong>@ViewBag.result</strong></h3></p>
+                        }
+                    </div>
                 </div>
             </div>
         </div>        

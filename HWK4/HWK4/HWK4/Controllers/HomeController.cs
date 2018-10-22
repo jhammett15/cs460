@@ -9,6 +9,10 @@ namespace HWK4.Controllers
 {
     public class HomeController : Controller
     {
+        private double mi;
+        private string measurement;
+        private string result;
+
         public ActionResult Index()
         {
             return View();
@@ -17,10 +21,13 @@ namespace HWK4.Controllers
         [HttpGet]
         public ActionResult MileConverter()
         {
-            double mi = Convert.ToDouble(Request.QueryString["miles"]);
-            string measurement = Request.QueryString["units"];
-            double total;
-            string result;
+            Debug.WriteLine(Request.QueryString["miles"]);
+            Debug.WriteLine(Request.QueryString["units"]);
+
+
+            mi = Convert.ToDouble(Request.QueryString["miles"]);
+            measurement = Request.QueryString["units"];
+            double total = 1;
 
             if(measurement == "millimeters")
             {
@@ -45,12 +52,20 @@ namespace HWK4.Controllers
                 }
             }
 
-            if(mi != null && measurement != null)
+            result = mi + " miles is equal to " + total + " " + measurement;
+
+            Debug.WriteLine(total);
+            Debug.WriteLine(result);
+
+            if (measurement != null)
             {
-                result = mi + " miles is equal to " + total + " " + measurement + ".";
+                ViewBag.measurement = measurement;
+                ViewBag.result = result;
             }
 
             return View();
-        }        
+        }
+
+       
     }
 }
