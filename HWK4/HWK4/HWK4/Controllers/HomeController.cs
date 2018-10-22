@@ -19,7 +19,7 @@ namespace HWK4.Controllers
         }
 
         [HttpGet]
-        public ActionResult MileConverter()
+        public ActionResult Converter()
         {
             Debug.WriteLine(Request.QueryString["miles"]);
             Debug.WriteLine(Request.QueryString["units"]);
