@@ -82,7 +82,62 @@ After creating the branches I first switched to the mileconverter branch where I
 
 ## Converter View
 
-The next thing I worked on, although I didn't finish it until after I completed the Home Controller, was the Converter View.
+![HomeConverter1](HWK4/images/HomeConverter1.PNG)
+
+The next thing I worked on, although I didn't finish it until after I completed the Home Controller, was the Converter View. This file created a form whose method was get that took in input from the user and put it into a query string. The first input field was a simple text box that the user put the number of miles in. This was fairly simple but it needed some input validation. First I added the type attribute, which limited what the user could type in to numbers. Then I added the min tag to set the minimum number of miles to 0, and put a required tag in so they were sure to fill it out. The only other thing of note in this element was the step attribute, which allows the user to put doubles as well as integers in.
+
+The next input field was a div in which I put a bunch of radio buttons for the units to be selected from. I set their name to units so I could reference them in the HomeController and their value to whatever their measurement was so it would appear as so in the query string. I then added a div with a razor statement at the bottom. I checked to see if the ViewBag.measurement field was null. If it was null, that meant that the query string was empty and no input had been submitted yet. If it was not null, it got the result string that the HomeController generated and appended it to the bottom of the screen.
+
+![HomeConverter1](HWK4/images/HomeConverter2.PNG)
+
+```html
+@{
+    ViewBag.Title = "Converter";
+}
+
+<h2>Convert Miles to Metric</h2>
+
+<!--The View of the Mile Converter page. Creates a form that takes in the number of miles from a user in an input box and the conversion 
+    type in a radio button group, then if the ViewBag.measurement variable is not null, meaning that they have hit the submit button, it 
+    returns a string with the conversion.-->
+<form action="/Home/Converter" method="get">
+    <div class="container-fluid">
+        <div class="content">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4><strong>Miles</strong></h4>
+                    <!--An input field to take in the number of miles. Validates that there was input, that it was above zero, and that it 
+                        was a number entered.-->
+                    <input id="miles" type="number" name="miles" min="0" step="any" required/>
+                </div>
+                <div class="col-md-4">
+                    <h3>Select a unit</h3>
+                    <!--A radio button group for the type of units, the default value checked is millimeters.-->
+                    <div class="radio">
+                        <label><input type="radio" name="units" value="millimeters" checked/>millimeters</label> <br />
+                        <label><input type="radio" name="units" value="centimeters"/>centimeters</label> <br />
+                        <label><input type="radio" name="units" value="meters"/>meters</label> <br />
+                        <label><input type="radio" name="units" value="kilometers"/>kilometers</label> <br />
+                    </div>
+                    <input type="submit" value="Convert"/>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <!--If the ViewBag.measurement variable is not null, meaning that the user has entered input and hit submit, then convert
+                        the miles into the designated units and return a string with the result.-->
+                    <div>
+                        @if (ViewBag.measurement != null)
+                        {
+                            <p><h3 id="milesConverted"><strong>@ViewBag.result</strong></h3></p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div> 
+</form>
+```
 
 ## Home Controller
 
