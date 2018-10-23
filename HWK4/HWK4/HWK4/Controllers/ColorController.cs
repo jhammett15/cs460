@@ -15,6 +15,12 @@ namespace HWK4.Controllers
         {
             return View();
         }
+        
+        [HttpPost]
+        public ActionResult Create()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Create(Color firstColor, Color secondColor)
