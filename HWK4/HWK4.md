@@ -43,4 +43,124 @@ I also did minor changes like change the title of the pages and put my name on t
 
 ![HomeIndex](HWK4/images/HomeIndex.PNG)
 
-This class was very straightforward and did not require much changing. I simply changed the descriptions to match what my pages were about, then changed the links to the buttons.
+After creating the branches I first switched to the mileconverter branch where I completed the HomeController's Index page (the landing site for the project), and the mile converter. The Index View was very straightforward and did not require much changing. I simply changed the descriptions to match what my pages were about, then changed the links to the buttons.
+
+```html
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<!--A View for the home page, contains a description of the project, as well as a link to the project directions page. Below that there is 
+    a description of each page as well as a button linking to them.-->
+<div class="jumbotron">
+    <h1>CS 460 Homework 4</h1>
+    <p class="lead">
+        A few forms and some simple server-side logic -- learning the basics of GET, POST, query strings, form data and 
+        handling it all from an ASP.NET MVC 5 application.</p>
+    <p><a href="http://www.wou.edu/~morses/classes/cs46x/assignments/HW4_1819.html" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Mile to Metric Converter</h2>
+        <p>
+            Want to know how many millimeters there are in 26.2 miles? This calculator is for you. Uses query strings to send form data to
+            the server, which performs the calculation and returns the answer in the requested page.
+        </p>
+        <p><button type="button">@Html.ActionLink("Try it out", "MileConverter")</button></p>        
+    </div>
+    <div class="col-md-4">
+        <h2>Color Chooser</h2>
+        <p>
+            Typical online color choosers are way too useful. We wanted something fun and completely useless. This form POSTs the data to the
+            server.
+        </p>
+        <p><button type="button">@Html.ActionLink("Check it out", "Create", "Color")</button></p>
+    </div>
+</div>
+```
+
+## Converter View
+
+The next thing I worked on, although I didn't finish it until after I completed the Home Controller, was the Converter View.
+
+## Home Controller
+
+On the HomeController Page there was already an existing ActionResult method for the View for the Index, I just needed to create the View itself. As for the methods I had to add to this controller, the only one I needed to add was a Converter method, and create its corresponding View. 
+
+The Converter method is an HttpGet method that uses Request.QueryString to retrieve information from the query string that is generated in the URL when the user hits the submit button on their input. It retrieved the mile string (which it then converted into a double) and the units string. Then it performed a calculation on the mile number depending on the unit it retrieved. Finally, it created a string to return this information in and added this string to the ViewBag if the input it retrieved from the user was not null (meaning there was input to be retrieved).
+
+```C#
+public class HomeController : Controller
+    {
+        private double? mi;
+        private string measurement;
+        private string result;
+
+        /// <summary>
+        /// A Controller method that generates the "Home" or "Index" page of the project
+        /// </summary>
+        /// <returns>The View for the Index page.</returns>
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// A Controller method that retrieves a double representing the number of miles and a string representing the measurement to be 
+        /// converted to from the View via a GET method. It then converts the miles, storing the result in a new variable. Finally it checks 
+        /// so see if the measurement variable is not null. If it is null, this means that the input has not been submitted yet. If it is 
+        /// not null, the input has ben submitted and it stores the measurement variable and result of the conversion in a ViewBag.
+        /// </summary>
+        /// <returns>The View for the Mile Converter page</returns>
+        [HttpGet]
+        public ActionResult Converter()
+        {
+            Debug.WriteLine(Request.QueryString["miles"]);
+            Debug.WriteLine(Request.QueryString["units"]);
+
+            mi = Convert.ToDouble(Request.QueryString["miles"]);
+            measurement = Request.QueryString["units"];
+            double? total;
+
+            if(measurement == "millimeters")
+            {
+                total = mi * 1609.34 * 1000;
+            }
+            else
+            {
+                if(measurement == "centimeters")
+                {
+                    total = mi * 1609.34 * 100;
+                }
+                else
+                {
+                    if(measurement == "meters")
+                    {
+                        total = mi * 1609.34;
+                    }
+                    else
+                    {
+                        total = mi * 1.60934;
+                    }
+                }
+            }
+
+            result = mi + " miles is equal to " + total + " " + measurement;
+
+            Debug.WriteLine(total);
+            Debug.WriteLine(result);
+
+            if (measurement != null)
+            {
+                ViewBag.measurement = measurement;
+                ViewBag.result = result;
+            }
+
+            return View();
+        }       
+    }
+```
+
+
+
