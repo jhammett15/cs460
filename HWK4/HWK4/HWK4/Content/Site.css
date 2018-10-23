@@ -23,6 +23,10 @@ textarea {
     max-width: 280px;
 }
 
+#milesConverted {
+    color:darkred;
+}
+
 /* Overrides the square class with my own custom square with a height, width, border, and default background color*/
 div.square {
     height: 100px;
