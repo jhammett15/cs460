@@ -7,7 +7,11 @@
 
 <p>Please choose two colors</p>
 
+<!-- Creates the form that the user is to choose the colors from, with the addition of squares to demonstrate the addition of the two
+    colors visually-->
 <form action="/Color/Create" method="post">
+    <!--Labels and HTML helper methods, sets the name to first color, does not give it a default value, and adds html attributes setting the text box to
+        be a popup box to choose colors from rather than a regular text box. Also gives it a placeholder value-->
     <p><strong>First Color</strong></p>
     @Html.TextBox("firstColor", null, htmlAttributes: new { @class = "form-control", type = "Color", placeholder = "#178C2A" })
     <p><strong>Second Color</strong></p>
@@ -17,6 +21,8 @@
         <button type="submit">Mix Colors</button>
     </div>
 
+    <!--A grid to display the colors visually. Creates the squares using an overriden square class and an inline style tag that sets the 
+        color of the square dynamically based on what is returned in the ViewBag-->
     <div class="row">
         <div class="col-sm-1">
             <div class="square" style="background-color:#@ViewBag.color1"></div>
@@ -37,5 +43,4 @@
             <p>@ViewBag.color3</p>
         </div>
     </div>
-
 </form>
