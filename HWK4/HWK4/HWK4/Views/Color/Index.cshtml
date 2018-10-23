@@ -3,20 +3,19 @@
     ViewBag.Title = "Index";
 }
 
-
-@{
-    ViewBag.Title = "Create";
-}
-
 <h2>Create a New Color</h2>
 
 <p>Please enter colors in HTML hexadecimal format: #AABBCC</p>
 
-<form>
+<form action="/Color/Create" method="post">
     <p><strong>First Color</strong></p>
-    <input type="text" name="firstColor" placeholder="#178C2A" pattern="#[A-F0-9]{6}" required />
+    @Html.TextBox("firstColor", null, htmlAttributes: new { @class="form-control", type="Color", placeholder="#178C2A"})
     <p><strong>Second Color</strong></p>
-    <input type="text" name="secondColor" placeholder="#B4641D" pattern="#[A-F0-9]{6}" required /> <br /><br />
-    <input type="button" value="Mix Colors" /> <br /><br />
+    @Html.TextBox("secondColor", null, htmlAttributes: new { @class="form-control", type="Color", placeholder="B4641D"})
+    <br /><br />
+    <div class="button">
+        <button type="submit">Mix Colors</button>
+    </div>
+</form>
 
     

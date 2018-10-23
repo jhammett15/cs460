@@ -23,8 +23,9 @@ textarea {
     max-width: 280px;
 }
 
-.square {
+div.square {
     height: 100px;
     width: 100px;
-    background-color: #555;
+    border: 1px solid;
+    background-color:aliceblue;
 }

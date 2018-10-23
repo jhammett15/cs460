@@ -7,34 +7,33 @@
 
 <p>Please enter colors in HTML hexadecimal format: #AABBCC</p>
 
-<form>
+<form action="/Color/Create" method="post">
     <p><strong>First Color</strong></p>
-    <input type="text" name="firstColor" placeholder="#178C2A" pattern="#[A-F0-9]{6}" required/>
+    @Html.TextBox("firstColor", null, htmlAttributes: new { @class = "form-control", type = "Color", placeholder = "#178C2A" })
     <p><strong>Second Color</strong></p>
-    <input type="text" name="secondColor" placeholder="#B4641D" pattern="#[A-F0-9]{6}" required/> <br /><br />
-    <input type="button" value="Mix Colors" /> <br /><br />
+    @Html.TextBox("secondColor", null, htmlAttributes: new { @class = "form-control", type = "Color", placeholder = "B4641D" })
+    <br /><br />
+    <div class="button">
+        <button type="submit">Mix Colors</button>
+    </div>
 
     <div class="row">
         <div class="col-sm-1">
-            <div class="square"></div>
+            <div class="square" background-color:></div>
         </div>
         <div class="col-sm-1" align="center">
             <p style="text-align: center">+</p>
         </div>
         <div class="col-sm-1">
-            <div class="square"></div>
+            <div class="square" Background-color="#@ViewBag.color2"></div>
+            
         </div>
         <div class="col-sm-1" align="center">
             <p style="text-align: center">=</p>
         </div>
         <div class="col-sm-1">
-            <div class="square">
+            <div class="square" color="@ViewBag.color3"></div>
         </div>
     </div>
+
 </form>
-
-
-
-
-
-
