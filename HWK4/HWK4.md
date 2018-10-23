@@ -41,6 +41,6 @@ I also did minor changes like change the title of the pages and put my name on t
 
 ## Home Index View
 
-![HomeIndex](HWK4/HWK4/images/HomeIndex.PNG)
+![HomeIndex](HWK4/images/HomeIndex.PNG)
 
 This class was very straightforward and did not require much changing. I simply changed the descriptions to match what my pages were about, then changed the links to the buttons.
