@@ -9,9 +9,9 @@
 
 <form>
     <p><strong>First Color</strong></p>
-    <input type="text" name="firstColor" placeholder="#178C2A" />
+    <input type="text" name="firstColor" placeholder="#178C2A" pattern="#[A-F0-9]{6}" required/>
     <p><strong>Second Color</strong></p>
-    <input type="text" name="secondColor" placeholder="#B4641D" /> <br /><br />
+    <input type="text" name="secondColor" placeholder="#B4641D" pattern="#[A-F0-9]{6}" required/> <br /><br />
     <input type="button" value="Mix Colors" /> <br /><br />
 
     <div class="row">

@@ -8,7 +8,12 @@ namespace HWK4.Controllers
 {
     public class ColorController : Controller
     {
-        // GET: Color
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult Create()
         {
             return View();
