@@ -217,5 +217,104 @@ public class HomeController : Controller
     }
 ```
 
+After I was done with the mile converter I switched to the colorchooser branch.
 
+## Color Index View
 
+The first thing I did on this branch was complete the Index View for the ColorController. What I needed to do here was create a HttpPost method that took in input in the form of a hexadecimal color from some text boxes and create a button to submit them. I used Html Helper methods for the text boxes, but then I veered slightly from the directions. What I believe they were supposed to be were simple text boxes where the user typed in a hexadecimal string, which I then validated was of the correct form and converted into a color. What I ended up doing was making a TextBox that used a popup box to select an RGB color. This negated the need for input validation, which I liked so I kept. I know it's probably not what was required, and if I have the time later I'll go in and fix it but for now the logic works so I'll leave it be.
+
+![ColorIndex](HWK4/images/ColorIndex2.PNG)
+
+```html
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Create a New Color</h2>
+
+<p>Please choose two colors</p>
+
+<!-- Creates the form that the user is to choose the colors from -->
+<form action="/Color/Create" method="post">
+    <!--Labels and HTML helper methods, sets the name to first color, does not give it a default value, and adds html attributes setting the text box to
+        be a popup box to choose colors from rather than a regular text box. Also gives it a placeholder value-->
+    <p><strong>First Color</strong></p>
+    @Html.TextBox("firstColor", null, htmlAttributes: new { @class = "form-control", type = "Color", placeholder = "#178C2A" })
+    <p><strong>Second Color</strong></p>
+    @Html.TextBox("secondColor", null, htmlAttributes: new { @class = "form-control", type = "Color", placeholder = "B4641D" })
+    <br /><br />
+    <div class="button">
+        <button type="submit">Mix Colors</button>
+    </div>
+</form>
+```
+
+Once this was done I vascillated between the Create View and the ColorController trying to get the logic to work.
+
+## Color Create View
+
+This page is created when input is submitted on the Color Index page. The Index page uses a POST method to send its data to the controller. The action tag in the top of the form tells it to send it to the Create method, which then returns this view. The top of the form looks much the same as the Index page. This is by design so the user can input more colors and see their combination without going back to the Index page.
+
+Below that is a Bootstrap grid containing a bunch of squares. I overrode html's default square class with my own to give me more control.
+
+```css
+/* Overrides the square class with my own custom square with a height, width, border, and default background color*/
+div.square {
+    height: 100px;
+    width: 100px;
+    border: 1px solid;
+    background-color:aliceblue;
+}
+```
+
+I also input a style tag inside the div that changed the background color of the square based on what was in the ViewBag. This was difficult to figure out but the solution ended up being to use a css tag exactly how I would have in the css file. However, because the value in the ViewBag was a string, not a number, I had to put a # in front of it so the program would recognize it as a hex code. I also probably could have played with the css some more on the + and = in between the squares to make them look nicer but they work. Also, in the process of making sure the ViewBag was returning the right values I printed them out below the squares. This is unnecessary except for debugging purposes but I liked the extra information so I left it in.
+
+![ColorCreate](HWK4/images/ColorCreate.PNG)
+
+```html
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create a New Color</h2>
+
+<p>Please choose two colors</p>
+
+<!-- Creates the form that the user is to choose the colors from, with the addition of squares to demonstrate the addition of the two
+    colors visually-->
+<form action="/Color/Create" method="post">
+    <!--Labels and HTML helper methods, sets the name to first color, does not give it a default value, and adds html attributes setting the text box to
+        be a popup box to choose colors from rather than a regular text box. Also gives it a placeholder value-->
+    <p><strong>First Color</strong></p>
+    @Html.TextBox("firstColor", null, htmlAttributes: new { @class = "form-control", type = "Color", placeholder = "#178C2A" })
+    <p><strong>Second Color</strong></p>
+    @Html.TextBox("secondColor", null, htmlAttributes: new { @class = "form-control", type = "Color", placeholder = "B4641D" })
+    <br /><br />
+    <div class="button">
+        <button type="submit">Mix Colors</button>
+    </div>
+
+    <!--A grid to display the colors visually. Creates the squares using an overriden square class and an inline style tag that sets the 
+        color of the square dynamically based on what is returned in the ViewBag-->
+    <div class="row">
+        <div class="col-sm-1">
+            <div class="square" style="background-color:#@ViewBag.color1"></div>
+            <p>@ViewBag.color1</p>
+        </div>
+        <div class="col-sm-1" align="center">
+            <p style="text-align: center">+</p>
+        </div>
+        <div class="col-sm-1">
+            <div class="square" style="background-color:#@ViewBag.color2"></div>
+            <p>@ViewBag.color2</p>
+        </div>
+        <div class="col-sm-1" align="center">
+            <p style="text-align: center">=</p>
+        </div>
+        <div class="col-sm-1">
+            <div class="square" style="background-color:#@ViewBag.color3"></div>
+            <p>@ViewBag.color3</p>
+        </div>
+    </div>
+</form>
+```
