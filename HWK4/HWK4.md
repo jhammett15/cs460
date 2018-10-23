@@ -18,23 +18,23 @@ The first thing I did was create the pages I was going to need. In the HomeContr
 
 ```html
 <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Homework-4", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Mile Converter", "Converter", "Home")</li>
-                    <li>@Html.ActionLink("Color Chooser", "Index", "Color")</li>
-                </ul>
-            </div>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Homework-4", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Mile Converter", "Converter", "Home")</li>
+                <li>@Html.ActionLink("Color Chooser", "Index", "Color")</li>
+            </ul>
         </div>
     </div>
+</div>
 ```
 
 I also did minor changes like change the title of the pages and put my name on the footer.
@@ -147,74 +147,74 @@ The Converter method is an HttpGet method that uses Request.QueryString to retri
 
 ```C#
 public class HomeController : Controller
+{
+    private double? mi;
+    private string measurement;
+    private string result;
+
+    /// <summary>
+    /// A Controller method that generates the "Home" or "Index" page of the project
+    /// </summary>
+    /// <returns>The View for the Index page.</returns>
+    public ActionResult Index()
     {
-        private double? mi;
-        private string measurement;
-        private string result;
+        return View();
+    }
 
-        /// <summary>
-        /// A Controller method that generates the "Home" or "Index" page of the project
-        /// </summary>
-        /// <returns>The View for the Index page.</returns>
-        public ActionResult Index()
+    /// <summary>
+    /// A Controller method that retrieves a double representing the number of miles and a string representing the measurement to be 
+    /// converted to from the View via a GET method. It then converts the miles, storing the result in a new variable. Finally it checks 
+    /// so see if the measurement variable is not null. If it is null, this means that the input has not been submitted yet. If it is 
+    /// not null, the input has ben submitted and it stores the measurement variable and result of the conversion in a ViewBag.
+    /// </summary>
+    /// <returns>The View for the Mile Converter page</returns>
+    [HttpGet]
+    public ActionResult Converter()
+    {
+        Debug.WriteLine(Request.QueryString["miles"]);
+        Debug.WriteLine(Request.QueryString["units"]);
+
+        mi = Convert.ToDouble(Request.QueryString["miles"]);
+        measurement = Request.QueryString["units"];
+        double? total;
+
+        if(measurement == "millimeters")
         {
-            return View();
+            total = mi * 1609.34 * 1000;
         }
-
-        /// <summary>
-        /// A Controller method that retrieves a double representing the number of miles and a string representing the measurement to be 
-        /// converted to from the View via a GET method. It then converts the miles, storing the result in a new variable. Finally it checks 
-        /// so see if the measurement variable is not null. If it is null, this means that the input has not been submitted yet. If it is 
-        /// not null, the input has ben submitted and it stores the measurement variable and result of the conversion in a ViewBag.
-        /// </summary>
-        /// <returns>The View for the Mile Converter page</returns>
-        [HttpGet]
-        public ActionResult Converter()
+        else
         {
-            Debug.WriteLine(Request.QueryString["miles"]);
-            Debug.WriteLine(Request.QueryString["units"]);
-
-            mi = Convert.ToDouble(Request.QueryString["miles"]);
-            measurement = Request.QueryString["units"];
-            double? total;
-
-            if(measurement == "millimeters")
+            if(measurement == "centimeters")
             {
-                total = mi * 1609.34 * 1000;
+                total = mi * 1609.34 * 100;
             }
             else
             {
-                if(measurement == "centimeters")
+                if(measurement == "meters")
                 {
-                    total = mi * 1609.34 * 100;
+                    total = mi * 1609.34;
                 }
                 else
                 {
-                    if(measurement == "meters")
-                    {
-                        total = mi * 1609.34;
-                    }
-                    else
-                    {
-                        total = mi * 1.60934;
-                    }
+                    total = mi * 1.60934;
                 }
             }
+        }
 
-            result = mi + " miles is equal to " + total + " " + measurement;
+        result = mi + " miles is equal to " + total + " " + measurement;
 
-            Debug.WriteLine(total);
-            Debug.WriteLine(result);
+        Debug.WriteLine(total);
+        Debug.WriteLine(result);
 
-            if (measurement != null)
-            {
-                ViewBag.measurement = measurement;
-                ViewBag.result = result;
-            }
+        if (measurement != null)
+        {
+            ViewBag.measurement = measurement;
+            ViewBag.result = result;
+        }
 
-            return View();
-        }       
-    }
+        return View();
+    }       
+}
 ```
 
 After I was done with the mile converter I switched to the colorchooser branch.
@@ -317,4 +317,75 @@ I also input a style tag inside the div that changed the background color of the
         </div>
     </div>
 </form>
+```
+
+## Color Controller
+
+This class controlled the logic behind the Views for the Color Chooser. The Index View I left as default because it didn't need changing. In the Create ActionResult method, it took in two colors, which it pulled from the TextBox elements on the Index page. It took those colors, and converted them into strings. It did this by pulling the R, G, and B values from the color, converting that to a hex value, and concatenating the three into a string. 
+
+For the third color, I created a ColorAdd method that takes in two colors. It takes the R, G, and B values from those colors, adds them together, then converts them into hex and concatenates them. This string gets returned to the Create ActionResult method, and the three get put into the ViewBag to be used in the Create View.
+
+```C#
+public class ColorController : Controller
+{
+    /// <summary>
+    /// Controller method that generates the Color Converter page
+    /// </summary>
+    /// <returns>the view for the color converter page</returns>
+    public ActionResult Index()
+    {
+        return View();
+    }
+
+    /// <summary>
+    /// Takes in two colors, converts them to hexadecimal, then uses them to render a third color. Then adds these colors to the 
+    /// ViewBag and returns the View. The Debug.WriteLines are unnecessary to the view, but useful to see that the correct hexadecimal
+    /// numbers are being returned.
+    /// </summary>
+    /// <param name="firstColor">A Color object, the first object chosen by the user</param>
+    /// <param name="secondColor">A Color object, the second object chosen by the user</param>
+    /// <returns>The View for the Create page</returns>
+    [HttpPost]
+    public ActionResult Create(Color firstColor, Color secondColor)
+    {
+        string color1hex = firstColor.R.ToString("X2") + firstColor.G.ToString("X2") + firstColor.B.ToString("X2");
+        string color2hex = secondColor.R.ToString("X2") + secondColor.G.ToString("X2") + secondColor.B.ToString("X2");
+        string color3hex = ColorAdd(firstColor, secondColor);
+
+        ViewBag.color1 = color1hex;
+        ViewBag.color2 = color2hex;
+        ViewBag.color3 = color3hex;
+
+        Debug.WriteLine(color1hex);
+        Debug.WriteLine(color2hex);
+        Debug.WriteLine(color3hex);
+
+        return View();
+    }
+
+    /// <summary>
+    /// Takes in two colors, separates them into their RGB components and adds these components together. If any of the components' 
+    /// values are over 255 (max), then they default to 255. Then combines these separate RGB components into a hexadecimal string
+    /// </summary>
+    /// <param name="color1">A Color object, one of two that will be combined</param>
+    /// <param name="color2">A Color object, one of two that will be combined.</param>
+    /// <returns>A string representing the hexadecimal value of the two colors added together</returns>
+    public string ColorAdd(Color color1, Color color2)
+    {
+        int r = color1.R + color2.R;
+        int g = color1.G + color2.G;
+        int b = color1.B + color2.B;
+
+        if (r > 255)
+            r = 255;
+        if (g > 255)
+            g = 255;
+        if (b > 255)
+            b = 255;
+
+        string colorhex = r.ToString("X2") + g.ToString("X2") + b.ToString("X2");
+
+        return colorhex;
+    }
+}
 ```
