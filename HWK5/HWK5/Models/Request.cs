@@ -33,9 +33,17 @@ namespace HWK5.Models
         [Required(ErrorMessage = "Please enter your request")]
         public string Explanation { get; set; }
 
+        [Required]
+        public DateTime CurrTime { get; set; }
+
         public override string ToString()
         {
             return $"{base.ToString()} {FirstName} {LastName} {PhoneNumber} {ApartmentName} {UnitNumber}";
+        }
+
+        public Request()
+        {
+            CurrTime = DateTime.Now;
         }
     }
 }

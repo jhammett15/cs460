@@ -24,7 +24,7 @@ namespace HWK5.Controllers
         }
 
         [HttpPost]
-        public ActionResult RequestForm([Bind(Include = "ID, FirstName, LastName, PhoneNumber, ApartmentName, UnitNumber, Explanation")] Request request)
+        public ActionResult RequestForm([Bind(Include = "ID, FirstName, LastName, PhoneNumber, ApartmentName, UnitNumber, Explanation, ")] Request request)
         {
             if(ModelState.IsValid)
             {
