@@ -154,6 +154,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\RequestContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -161,9 +162,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Requests.mdf" />
-    <Content Include="App_Data\Requests_log.ldf">
-      <DependentUpon>Requests.mdf</DependentUpon>
+    <Content Include="App_Data\Down.sql" />
+    <Content Include="App_Data\OurRequests.mdf" />
+    <Content Include="App_Data\OurRequests_log.ldf">
+      <DependentUpon>OurRequests.mdf</DependentUpon>
     </Content>
     <Content Include="App_Data\Up.sql" />
     <Content Include="Content\bootstrap-theme.css" />

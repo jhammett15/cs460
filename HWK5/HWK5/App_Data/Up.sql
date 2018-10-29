@@ -1,12 +1,12 @@
-﻿-- Requests table
+-- Requests table
 CREATE TABLE [dbo].[Requests]
 (
 	[ID]			INT IDENTITY (1,1)	NOT NULL,
 	[FirstName]		NVARCHAR(64)		NOT NULL,
 	[LastName]		NVARCHAR(64)		NOT NULL,
-	[PhoneNumber]	INT (10)			NOT NULL,
+	[PhoneNumber]	NVARCHAR(10)		NOT NULL,
 	[ApartmentName]	NVARCHAR(64)		NOT NULL,
-	[UnitNumber]	int (5)				NOT NULL,
+	[UnitNumber]	INT					NOT NULL,
 	[Explanation]	NVARCHAR(250)		NOT NULL,
 	CONSTRAINT [PK_dbo.Requests] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
