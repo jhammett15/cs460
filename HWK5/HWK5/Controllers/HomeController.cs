@@ -13,16 +13,16 @@ namespace HWK5.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult RequestForm()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Form to fill out a maintenance request.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult ViewRequests()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "All current requests.";
 
             return View();
         }
