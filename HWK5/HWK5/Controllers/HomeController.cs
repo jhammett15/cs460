@@ -17,6 +17,7 @@ namespace HWK5.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult RequestForm()
         {
             return View();
@@ -29,7 +30,7 @@ namespace HWK5.Controllers
             {
                 db.Requests.Add(request);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ViewRequests");
             }
 
             return View(request);
@@ -37,9 +38,7 @@ namespace HWK5.Controllers
 
         public ActionResult ViewRequests()
         {
-            ViewBag.Message = "All current requests.";
-
-            return View();
+            return View(db.Requests.ToList());
         }
     }
 }
