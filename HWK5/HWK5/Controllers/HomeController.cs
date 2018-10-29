@@ -38,7 +38,7 @@ namespace HWK5.Controllers
 
         public ActionResult ViewRequests()
         {
-            return View(db.Requests.ToList());
+            return View(db.Requests.OrderBy(x => x.CurrTime).ToList());
         }
     }
 }
