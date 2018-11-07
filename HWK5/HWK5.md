@@ -41,8 +41,10 @@ DROP TABLE [dbo].[Requests];
 
 Here are images that show the scripts work as intended.
 
+up.sql:
 ![up.sql](images/up.PNG)
 
+down.sql:
 ![down.sql](images/down.PNG)
 
 The database I created was called OurRequests, and the Table I created through the SQL above was called Requests. The fields it contained were ID (which was the primary key), FirstName, LastName, PhoneNumber, ApartmentName, UnitNumber, Explanation, and CurrTime. All of these fields were required, so I marked them not null. The CurrTime field had the type DateNime. It could be set, as I did when I seeded the table, but when not set, as when I added to the database through the form, it defaulted to the current time. 
@@ -181,7 +183,7 @@ namespace HWK5.DAL
 
 ## WebConfig File
 
-
+It was also necessary to edit the WebConfig file for the project to add a connection to the database there. It was added in the Configuration tag, AFTER the ConfigSections tag. the name was the name of the database, and the connection string was gained from looking at the properties in the database. 
 
 ```html
 <connectionStrings>
@@ -191,26 +193,245 @@ namespace HWK5.DAL
 
 ## Home Controller
 
+Once all the background database work was done, I worked on the Controller and the Views. In the HomeController I added ActionResult methods for the RequestForm and ViewRequest Views. The Index View I kept and let serve as a home page. I kept the layout for it and did basic pages so it routed to my pages instead of the default ones and changed descriptions. I don't feel the need to include that code here since it was so minimal and not integral to the project.
+
+Before the methods I included one global variable called db. This was a RequestContext variable and was the Controller's access to the database.
+
+The RequestForm had two ActionResult methods: a GET and a POST. This follows the GET-POST-Redirect pattern: you get the unfulfilled form with the GET method, you post the data to the database with the POST method, which then Redirects you to a different page if successful.
+
+The POST method works by taking in a Request object, which you explicitly bind to have the Properties given. If they form a complete Model object, it adds that object to the database, saves the changes, then redirects you to the ViewRequests page.  If the method is not given a complete Model object, it returns the view for the RequestForm with the data it was given. In this case, error messages will display in the fields that were not filled out correctly.
+
+The ViewRequests ActionResult method returns the view for the ViewRequests View. It passes in the RequestContext variable, which is ordered by the CurrTime property and is passed through the ToString method.
+
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using HWK5.DAL;
+using HWK5.Models;
+
+namespace HWK5.Controllers
+{
+    /// <summary>
+    /// The controller class that handles the Home page, the RequestForm page, and the ViewRequests page
+    /// </summary>
+    public class HomeController : Controller
+    {
+        // creates an instance of the RequestContext, allows access to the database.
+        private RequestContext db = new RequestContext();
+
+        /// <summary>
+        /// Controller method that generates the Home, or Index, page
+        /// </summary>
+        /// <returns>The view for the Home page</returns>
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// HttpGet Controller method that returns the view for the RequstForm page. This page is the blank form.
+        /// </summary>
+        /// <returns>The View for the RequestForm page</returns>
+        [HttpGet]
+        public ActionResult RequestForm()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// HttpPost method for the RequestForm page. Takes in a Request object with the given parameters, and if they create 
+        /// a valid Model object, adds them to the database and saves the changes and redirects to the ViewRequests. If the 
+        /// ModelState was not valid, meaning that some information is missing or not the right type, return the view with the 
+        /// information given (will give error messages telling user what is missing)
+        /// Controller method
+        /// </summary>
+        /// <param name="request">A Request object that is to be added to the database</param>
+        /// <returns>If ModelState is Valid, redirect to ViewRequests method, if not return the RequestForm view partially
+        /// filled out with the information that was given</returns>
+        [HttpPost]
+        public ActionResult RequestForm([Bind(Include = "ID, FirstName, LastName, PhoneNumber, ApartmentName, UnitNumber, Explanation ")] Request request)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Requests.Add(request);
+                db.SaveChanges();
+                return RedirectToAction("ViewRequests");
+            }
+
+            return View(request);
+        }
+
+        /// <summary>
+        /// Controller method that returns the View for the ViewRequest page. The View takes in the database entries in 
+        /// ascending order
+        /// </summary>
+        /// <returns>The View for the ViewRequests page</returns>
+        public ActionResult ViewRequests()
+        {
+            return View(db.Requests.OrderBy(x => x.CurrTime).ToList());
+        }
+    }
+}
+```
 
 ## RequestForm View
 
+
+
+```html
+@model HWK5.Models.Request
+
+@{
+    ViewBag.Title = "RequestForm";
+}
+
+<h2>RequestForm</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Request</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ApartmentName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ApartmentName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ApartmentName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UnitNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UnitNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UnitNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Explanation, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Explanation, new { htmlAttributes = new { @class = "form-control", placeholder = "Explanation of request, maintenance required or complaint. Please be specific." } })
+            @Html.ValidationMessageFor(model => model.Explanation, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+```
 
 ## ViewRequest View
 
 
 
+```html
+@model IEnumerable<HWK5.Models.Request>
 
+@{
+    ViewBag.Title = "ViewRequests";
+}
 
+<h2>ViewRequests</h2>
 
+<p>
+    @Html.ActionLink("Create New", "RequestForm")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApartmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Explanation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrTime)
+        </th>
+        <th></th>
+    </tr>
 
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApartmentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Explanation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrTime)
+        </td>
+    </tr>
+}
 
-
-
-
-
-
-
-
-
-
-
+</table>
+```
