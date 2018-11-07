@@ -5,6 +5,7 @@
 The goal of this homework was to create a database-backed web application using ASP.NET MVC 5. This would take the form of a maintenance request form. To begin with I was to write the T-SQL necessary to create and populate a simple one-table database. The first page would be the request form. The user would fill out the fields and when submitted the data would be stored in a local database. The second part of the project was to create a table populated with the data from this database. I did this through the use of T-SQL
 
 ## Creating the database
+
 The first step in the project was to create the database that I would be adding to. This was done solely through an SQL script and VisualStudios. I created two scripts. An Up.sql, which created and seeded the table with default entries:
 
 ```sql
@@ -44,6 +45,97 @@ Following the creation of the table is the insert statement where I seeded it. T
 
 ## Request Model Class
 
+I next created the Model class to define the fields I would put in the form. I was careful to make sure that the property names I used matched up exactly with the field names in my table. 
+
+```c#
+/// <summary>
+/// Model class that defines all of the input elements in the database and gives restricions to them
+/// </summary>
+public class Request
+{
+    /// <summary>
+    /// The primary key, is not displayed anywhere but the database
+    /// </summary>
+    [Key]
+    public int ID { get; set; }
+
+    /// <summary>
+    /// The FirstName property in the database, it is a required field with a maximum length of 15
+    /// </summary>
+    [Required(ErrorMessage = "Please enter your first name")]
+    [StringLength(15)]
+    [Display(Name = "First Name")]
+    public string FirstName { get; set; }
+
+    // <summary>
+    /// The LastName property in the database, it is a required field with a maximum length of 15
+    /// </summary>
+    [Required(ErrorMessage = "Please enter your last name")]
+    [StringLength(15)]
+    [Display(Name = "Last Name")]
+    public string LastName { get; set; }
+
+    /// <summary>
+    /// The PhoneNumber property in the database, it is a required field of type PhoneNumber, the format of which is 
+    /// described by the regular expression.
+    /// </summary>
+    [Required(ErrorMessage = "Please enter your ten digit phone number")]
+    [DataType(DataType.PhoneNumber)]
+    [RegularExpression(@"^(\d{10})$")]
+    [Display(Name = "Phone Number")]
+    public string PhoneNumber { get; set; }
+
+    // <summary>
+    /// The ApartmentName property in the database, it is a required field with a maximum length of 30
+    /// </summary>
+    [Required(ErrorMessage = "Please enter your apartment name")]
+    [StringLength(30)]
+    [Display(Name = "Apartment Name")]
+    public string ApartmentName { get; set; }
+
+    // <summary>
+    /// The UnitNumber property in the database, it is a required field
+    /// </summary>
+    [Required(ErrorMessage = "Please enter your unit number")]
+    [Display(Name = "Unit Number")]
+    public int UnitNumber { get; set; }
+
+    // <summary>
+    /// The Explanation property in the database, it is a required field with a maximum length of 250
+    /// </summary>
+    [Required(ErrorMessage = "Please enter your request")]
+    [StringLength(250)]
+    public string Explanation { get; set; }
+
+    /// <summary>
+    /// The CurrTime property in the database, not gotten from the form but is set to the Current Time in this class
+    /// </summary>
+    [Required]
+    public DateTime CurrTime { get; set; }
+
+    /// <summary>
+    /// A ToString method which prints out the FirstName, LastName, PhoneNumber, ApartmentName, UnitNumber, and Explanation
+    /// properties.
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()
+    {
+        return $"{base.ToString()} {FirstName} {LastName} {PhoneNumber} {ApartmentName} {UnitNumber} {Explanation}";
+    }
+
+    /// <summary>
+    /// A Constructor method that sets the CurrTime property to the current time
+    /// </summary>
+    public Request()
+    {
+        CurrTime = DateTime.Now;
+    }
+}
+```
+
+This is a pretty basic Model class for the most part, each property has a get and set method. Each property also has multiple constraints. The ID property has a constraint that marks it as the key. The others have constraints that mark them as required, with error messages if they are not given, constraints that give the data type, and constraints that give the name that should be displayed. If this one is not given it will simply display the property name, which doesn't look as good. The PhoneNumber property also has a constraint that gives a regular expression that tells how the format of the input should be, constraining it to be a ten digit number. 
+
+Following the properties is a ToString method, and a constructor method which sets the CurrTime property to the current time. This is needed because the CurrTime property is not set by the user, and if not explicitly set here does not format correctly.
 
 ## DAL RequestContext Class
 
