@@ -41,9 +41,9 @@ DROP TABLE [dbo].[Requests];
 
 Here are images that show the scripts work as intended.
 
-![up.sql]((images/up.PNG))
+![up.sql](images/up.PNG)
 
-![down.sql]((images/down.PNG))
+![down.sql](images/down.PNG)
 
 The database I created was called OurRequests, and the Table I created through the SQL above was called Requests. The fields it contained were ID (which was the primary key), FirstName, LastName, PhoneNumber, ApartmentName, UnitNumber, Explanation, and CurrTime. All of these fields were required, so I marked them not null. The CurrTime field had the type DateNime. It could be set, as I did when I seeded the table, but when not set, as when I added to the database through the form, it defaulted to the current time. 
 
