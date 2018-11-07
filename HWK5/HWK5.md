@@ -39,6 +39,12 @@ And a Down.sql which cleared the table.
 DROP TABLE [dbo].[Requests];
 ```
 
+Here are images that show the scripts work as intended.
+
+![up.sql]((HWK5/images/up.PNG))
+
+![down.sql]((HWK5/images/down.PNG))
+
 The database I created was called OurRequests, and the Table I created through the SQL above was called Requests. The fields it contained were ID (which was the primary key), FirstName, LastName, PhoneNumber, ApartmentName, UnitNumber, Explanation, and CurrTime. All of these fields were required, so I marked them not null. The CurrTime field had the type DateNime. It could be set, as I did when I seeded the table, but when not set, as when I added to the database through the form, it defaulted to the current time. 
 
 Following the creation of the table is the insert statement where I seeded it. This part is fairly self-explanatory, I just said insert into the table these fields, given the values provided.
@@ -139,9 +145,49 @@ Following the properties is a ToString method, and a constructor method which se
 
 ## DAL RequestContext Class
 
+Another file that was needed was the RequestContext Class. This I put in a DAL folder which I created. This stands for Data Access Layer, and it serves as a layer of separation between the database and the program. It is a way to access the data without having your program access it directly. 
+
+For this file I had to import the Entity Framework package using the NuGet package manager. 
+
+The file itself is pretty basic, it extends DbContext, which comes from the Entity Framework package, and contains a constructor method, which calls on the constructor from the DbContext class and takes in the name of the database. It also contains a virtual DbSet method of type Request (our model class), which goes to the Requests table. This is what the controller will use to access the database.
+
+```c#
+using HWK5.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+
+namespace HWK5.DAL
+{
+    /// <summary>
+    /// The Context file for the database, allows access to the data, extends DbContext
+    /// </summary>
+    public class RequestContext : DbContext
+    {
+        /// <summary>
+        /// Constructor method for the RequestContext class, calls the constructor from the superclass with the name of the 
+        /// database
+        /// </summary>
+        public RequestContext() : base("name=OurRequests")
+        {
+        }
+
+        public virtual DbSet<Request> Requests { get; set; }
+    }
+}
+```
 
 ## WebConfig File
 
+
+
+```html
+<connectionStrings>
+    <add name="OurRequests" connectionString ="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Jerika\Documents\cs460\jhammett15.github.io\HWK5\HWK5\App_Data\OurRequests.mdf;Integrated Security=True" providerName="System.Data.SqlClient"/>
+</connectionStrings>
+```
 
 ## Home Controller
 
@@ -150,3 +196,21 @@ Following the properties is a ToString method, and a constructor method which se
 
 
 ## ViewRequest View
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
