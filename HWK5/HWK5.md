@@ -369,11 +369,17 @@ Here is a picture of what the form looks like when error messages have been disp
 ![requestForm2](images/requestForm2.PNG)
 
 Here is a picture of what the form looks like, with correct test data entered.
-![requestForm2](images/requestForm3.PNG)
+![requestForm3](images/requestForm3.PNG)
+
+Here is what the data in the database looks like before the form is submitted.
+
+
+Upon submitting the form, here is a snapshot of the database to prove that it worked.
+
 
 ## ViewRequest View
 
-
+This View handles taking in the data from the table in the database and displaying it in a table. It, again, is largely auto-generated from the Controller. The first row in the table is the table headers, which use Html helper methods to get the column headings. The second section is in a foreach loop, and for each row in the table, it gets the data from the Model and displays the data.
 
 ```html
 @model IEnumerable<HWK5.Models.Request>
@@ -441,3 +447,15 @@ Here is a picture of what the form looks like, with correct test data entered.
 
 </table>
 ```
+
+This is what is displayed if you view the ViewRequests page before submitting a form.
+![viewRequests1](images/viewRequests1.PNG)
+
+Similarly, here is what the database looks like before any form submissions.
+![viewDB1](images/viewDB1.PNG)
+
+Here is what the ViewRequests page looks like after a test form is submitted.
+![viewRequests2](images/viewRequests2.PNG)
+
+And here is the database to show that it was updated as well.
+![viewDB2](images/viewDB.PNG)
