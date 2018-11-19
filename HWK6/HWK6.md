@@ -6,6 +6,8 @@ The goal of this project was to show that we can connect to a pre-existing large
 
 ## Setting up the Project
 
+To begin with, I created the project and imported the Entity Framework and Microsoft.SqlServer.Types packets using Nuget. In addition to that I added the given code to the Global.asax.cs file.
+
 The first step after creating my base project files was to download the database and extract the files. I first downloaded the zip file of the git repository where the sln file was stored. Once that was done I opened the wwi-sample.sln in the world-wide-importers folder and built the solution. I then right-clicked on the WorldWideImporters project, clicked publish, and set the target database connection to my SQL Server Management Studio connection. I changed the name of the database to be created there to WorldWideImporters and clicked publish.
 
 Once the connection was created in SSMS, I needed to establish a connection to that in Visual Studios. In the Server Explorer I right-clicked on Data Connections and clicked "add connection". I changed the name of my server to the localDB server in SSMS, and selected the WorldWideImporters database.
@@ -18,5 +20,7 @@ Now I needed to establish a connection in Linqpad so I could test my queries the
 
 Unfortunately these setup steps took me longer than I thought they should have. I didn't see the link in the homework instructions on how to restore the database until I had fiddled with it for a few hours, so I wasted time there. AFter I finally found that, I had trouble with the name of the database. For some reason the exact syntax wasn't clicking to me so it took me a while to figure out. Then after I finally got everything connected, the "Find" property in Linqpad wasn't being recognized so I searched for a reason for that for a while before I gave up and just started my project, hoping I wouldn't need to use it for a while. ******
 
-## Task 1
+
+
+## Task 1: People Search
 
