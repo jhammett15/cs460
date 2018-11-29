@@ -16,3 +16,7 @@ textarea {
     max-width: 280px;
 }
 
+#Input {
+    position:relative;
+    width: 75%;
+}

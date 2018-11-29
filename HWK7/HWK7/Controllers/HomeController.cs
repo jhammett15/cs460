@@ -11,6 +11,8 @@ namespace HWK7.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            string GiphyAPIKey = System.Web.Configuration.WebConfigurationManager.AppSettings["GiphyAPIKey"];
+            ViewBag.GiphyKey = GiphyAPIKey;
             return View();
         }
     }
