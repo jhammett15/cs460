@@ -20,7 +20,7 @@ function spacePressed(link) {
         type: 'GET',
         url: giphyLink,
         dataType: 'json',
-        success: displayString,
+        success: buildString,
         error: errorOnAjax
     });
 }

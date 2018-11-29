@@ -84,13 +84,53 @@ public class HomeController : Controller
 
 I've spent a lot of time on this file and haven't quite gotten it to work yet. 
 
+I start out with adding an event listener on the main method that looks for a keypress. The main method defines this keypress as being either the space or the enter key. If either of those is pressed, it runs the spacePressed method.
 
+```javascript
+window.addEventListener("keypress", main, false)
 
+function main(e) {
+    if (e.keyCode == "32" || e.keyCode == "13") {
+       spacePressed();
+    }
+}
+```
 
+I then have the spacePressed method. This method gets the input from the search bar (whose ID is Input), and gets the last word. It then defines the url, which I call giphyLink using the giphy url, my API key, and the word it's to search. It then makes the ajax call, defining the type to be GET, the url to be the one I just built, and the datatype to be json. If it's successful, it calls the buildString method. If it's not successful, it calls the errorOnAjax method.
 
+```javascript
+function spacePressed(link) {
+    var input = document.getElementById("Input").value;
+    var word = input.substr(input.trim().lastIndexOf(" ") + 1);
+    giphyLink = "https://api.giphy.com/v1/stickers/translate?&api_key=" + System.Web.Configuration.WebConfigurationManager.AppSettings["GiphyApiKey"] + "&s=" + word;
 
+    $.ajax({
+        type: 'GET',
+        url: giphyLink,
+        dataType: 'json',
+        success: buildString,
+        error: errorOnAjax
+    });
+}
+```
 
+I then defined the buildString method. It creates a variable called output, which is the area I want the javascript to display on the view. It then builds the string. I defined a "boring" word to be one that was less than six characters. If it was "boring", it was supposed to add the word to the output, and if the word was "interesting", it was supposed to get the gif associated with that word and add THAT to the output.
 
+```javascript
+function buildString(word) {
+    var output = document.getElementById("gifString");
+
+    if (word.length < 6) {
+        output.innerHTML += word + " ";
+    }
+    else {
+        var gif = '<iframe class="giphy-embed" src="' + word.data.embed_url + '" width="100" height="100"';
+        output.innerHTML += gif;
+    }
+}
+```
+
+I haven't quite gotten this section to work yet, I just wanted to have something up before it was graded so I could get at least partial credit, even if it's not very much. I'll be continuing to work on this so hopefully I'll get it done before then.
 
 
 
