@@ -49,4 +49,71 @@ I then added a reference to this file in my webconfig file.
     <add key="webpages:Version" value="3.0.0.0"/>
     ...
 ```
+## Home Controller
+
+This was the name of the controller I chose for this project. It has two methods in it: an ActionResult method that takes you to the view, and a JsonResult method that takes care of the javascript. 
+
+```c#
+public class HomeController : Controller
+{
+    public ActionResult Index()
+    {
+        return View();
+    }
+
+    public JsonResult GiphySticker(int lastWord)
+    {
+        string giphyAPIKey = System.Web.Configuration.WebConfigurationManager.AppSettings["GiphyAPIKey"];
+        string giphyURL = "https://api.giphy.com/v1/stickers/translate?&api_key=" + giphyAPIKey + "&s=" + lastWord;
+
+        WebRequest request = WebRequest.Create(giphyURL);
+        WebResponse response = request.GetResponse();
+
+        Stream giphyStream = response.GetResponseStream();
+        var giphyString = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<Object>(new StreamReader(giphyStream).ReadToEnd());
+
+        return Json(giphyString, JsonRequestBehavior.AllowGet);
+
+
+    }
+}
+```
+
+
+## Javascript
+
+I've spent a lot of time on this file and haven't quite gotten it to work yet. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
