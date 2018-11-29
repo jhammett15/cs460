@@ -29,11 +29,12 @@ function buildString(word) {
     var output = document.getElementById("gifString");
 
     if (word.length < 6) {
-        output.innerHTML += word + " ";
+        $('#gifString').append(" " + "<label>word</label>");
     }
     else {
-        var gif = '<iframe class="giphy-embed" src="' + word.data.embed_url + '" width="100" height="100"';
-        output.innerHTML += gif;
+        var giphyURL = word.data.images.preview_gif.url;
+        $('#gifString').append(<img width='100px;' height='100px;' src='" + giphyURL + "'/>);
+        
     }
 }
 
