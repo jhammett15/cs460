@@ -42,7 +42,7 @@ INSERT INTO [dbo].[Sellers] (Name) VALUES
     
 INSERT INTO [dbo].[Items] (Name, Description, Seller) VALUES
     ('Abraham Lincoln Hammer', 'A bench mallet fashioned from a broken rail-splitting maul in 1829 and owned by Abraham Lincoln', 'Pearl Greene'),
-    ('Albert Einstein\'s Telescope', 'A brass telescope owned by Albert Einstein in Germany, circa 1927', 'Gayle Hardy'),
+    ('Albert Einsteins Telescope', 'A brass telescope owned by Albert Einstein in Germany, circa 1927', 'Gayle Hardy'),
     ('Bob Dylan Love Poems', 'Five versions of an original unpublished, handwritten, love poem by Bob Dylan', 'Lyle Banks');
     
 INSERT INTO [dbo].[Bids] (Item, Buyer, Price, Timestamp) VALUES

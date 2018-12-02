@@ -75,3 +75,7 @@ Once I added these files to the App_Data folder, I created the database. I did t
 Once my database was connected I went into my Up.sql file and clicked the connect icon. Under Local I chose the MSSQLLocalDB option, and selected my database from the Database Name dropdown. I was then able to connect and run my up script.
 
 ![up](images/up.PNG)
+
+## Create Models
+
+Once the database was up and running I could reverse engineer the models from it. Before I could do this I had to go download Entity Framework into my project via the Nuget package manager. I right-clicked the Models folder and selected add new item. This item was of type ADO.NET Entity Data Model
