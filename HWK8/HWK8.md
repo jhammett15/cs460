@@ -64,16 +64,21 @@ GO
 ```
 
 ```sql
-DROP TABLE [dbo].[Buyers];
-DROP TABLE [dbo].[Sellers];
+
 DROP TABLE [dbo].[Items];
 DROP TABLE [dbo].[Bids];
+DROP TABLE [dbo].[Buyers];
+DROP TABLE [dbo].[Sellers];
 ```
 
-To create the database I went into the SQL Server Object explorer and right-clicked the Databases folder in localdb. I gave it a name and selected the location to by my App_data folder. I then right-clicked on the App_Data folder and clicked add existing item. I navigated to the App_data folder and selected the mdf and ldf files. I was then able to connect my up and down scripts to the database and run them. 
+To create the database I went into the SQL Server Object Explorer and right-clicked the Databases folder in localdb. I gave it a name and selected the location of my App_Data folder. I then right-clicked the App_Data folder in my project and clicked add existing file. I navigated to the App_Data folder again and selected the .mdf and .ldf files for the database. I was then able to connect my up and down scripts to the database and run them.
+
+>>>>>>> f96562cf28b8e5737be3194e246372017ede5e38
 
 ![up](images/up.PNG)
 
+![down](images/down.PNG)
+
 ## Create Models
 
-Once the database was up and running I could reverse engineer the models from it. Before I could do this I had to go download Entity Framework into my project via the Nuget package manager. I right-clicked the Models folder and selected add new item. This item was of type ADO.NET Entity Data Model
+Once the database was up and running I could reverse engineer the models from it. Before I could do this I had to go download Entity Framework into my project via the Nuget package manager. I right-clicked the Models folder and selected add new item. This item was of type ADO.NET Entity Data Model and I called it AuctionContext.
