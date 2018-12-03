@@ -12,5 +12,10 @@ namespace HWK8.Controllers
         {
             return View();
         }
+
+        public ActionResult ItemCreate()
+        {
+            return View();
+        }
     }
 }
