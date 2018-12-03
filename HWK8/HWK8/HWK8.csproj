@@ -265,6 +265,8 @@
     <Content Include="Views\Home\ItemCreate.cshtml" />
     <Content Include="Views\Home\ItemList.cshtml" />
     <Content Include="Views\Home\ItemDetails.cshtml" />
+    <Content Include="Views\Home\ItemDelete.cshtml" />
+    <Content Include="Views\Home\ItemEdit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

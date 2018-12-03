@@ -58,9 +58,57 @@ namespace HWK8.Controllers
             return View(details);
         }
 
+        [HttpGet]
+        public ActionResult ItemEdit(int id)
+        {
+            var details = db.Items.Where(i => i.ID == id).FirstOrDefault();
+            return View(details);
+        }
+
+        [HttpPost]
+        public ActionResult ItemEdit(int id, FormCollection collection)
+        {
+            try
+            {
+                var itemToUpdate = db.Items.Find(id);
+
+                itemToUpdate.Name = collection["Name"];
+                itemToUpdate.Description = collection["Description"];
+
+                db.SaveChanges();
+
+                return RedirectToAction("ItemList");
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ItemDelete(int id)
+        {
+            var details = db.Items.Where(i => i.ID == id).FirstOrDefault();
+            return View(details);
+        }
+
+        [HttpPost]
+        public ActionResult ItemDelete(int id, FormCollection collection)
+        {
+            try
+            {
+                db.Items.Remove(db.Items.Find(id));
+                db.SaveChanges();
+
+                return RedirectToAction("ItemList");
+            }
+            catch
+            {
+                return View();
+            }
+        }
         
-
-
         private AuctionVM CreateAuctionVM()
         {
             AuctionVM auction = new AuctionVM
