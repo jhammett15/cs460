@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HWK8.Models;
+using HWK8.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,14 +10,68 @@ namespace HWK8.Controllers
 {
     public class HomeController : Controller
     {
+        private AuctionContext db = new AuctionContext();
+
         public ActionResult Index()
         {
             return View();
         }
 
+        public ActionResult ItemList()
+        {
+            return View(db.Items.ToList());
+        }
+
+        [HttpGet]
         public ActionResult ItemCreate()
         {
+            List<string> names = new List<string>();
+
+            foreach(Seller i in db.Sellers)
+            {
+                names.Add(i.Name);
+            }
+
+            ViewBag.names = names;
+
+            var item = db.Items;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult ItemCreate([Bind(Include = "Name, Description, Seller")]Item item)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Items.Add(item);
+                db.SaveChanges();
+                return RedirectToAction("ItemCreate");
+            }
+
+            return View(item);
+        }
+
+        [HttpGet]
+        public ActionResult ItemDetails(int id)
+        {
+            var details = db.Items.Where(i => i.ID == id).FirstOrDefault();
+            return View(details);
+        }
+
+        
+
+
+        private AuctionVM CreateAuctionVM()
+        {
+            AuctionVM auction = new AuctionVM
+            {
+                Seller = db.Sellers.ToList(),
+                Item = db.Items.ToList(),
+                Buyer = db.Buyers.ToList(),
+                Bid = db.Bids.ToList()
+            };
+
+            return auction;
         }
     }
 }
