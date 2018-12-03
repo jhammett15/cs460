@@ -108,6 +108,34 @@ namespace HWK8.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult CreateBid()
+        {
+            List<string> buyers = new List<string>();
+
+            foreach (Buyer i in db.Buyers)
+            {
+                buyers.Add(i.Name);
+            }
+
+            ViewBag.buyers = buyers;
+            
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateBid([Bind(Include = "Item, Buyer, Price")]Bid bid)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Bids.Add(bid);
+                db.SaveChanges();
+                return RedirectToAction("CreateBid");
+            }
+
+            return View(bid);
+        }
         
         private AuctionVM CreateAuctionVM()
         {

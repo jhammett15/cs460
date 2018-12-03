@@ -36,7 +36,19 @@
 
     </dl>
 </div>
+
+<div class="row">
+    <div class="col" id="ajaxArea">
+        <p></p>
+    </div>
+</div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@section PageScripts
+{
+    <script type="text/javascript" src="~/Scripts/JavaScript.js"></script>
+}

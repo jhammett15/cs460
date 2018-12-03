@@ -22,6 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Item List", "ItemList", "Home")</li>
+                    <li>@Html.ActionLink("Create a Bid", "CreateBid", "Home")</li>
                     
                 </ul>
             </div>
@@ -38,5 +39,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @RenderSection("PageScripts", required: false)
 </body>
 </html>
