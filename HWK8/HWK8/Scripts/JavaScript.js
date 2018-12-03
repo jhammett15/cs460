@@ -7,13 +7,13 @@
         type: "GET",
         dataType: "json",
         url: URL,
-        success: displayBids,
+        success: displayBids(ID),
         error: alert("There was an error. Try again please!")
     });
 };
 
-function displayBids() {
-
+function displayBids(ID) {
+    $("ajaxArea").apend("<p>test</p>")
 }
 
 var interval = 1000 * 5;

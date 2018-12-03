@@ -8,7 +8,7 @@ namespace HWK8.Models
     public partial class AuctionContext : DbContext
     {
         public AuctionContext()
-            : base("name=AuctionContext")
+            : base("name=AuctionContext1")
         {
         }
 

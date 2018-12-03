@@ -8,6 +8,14 @@ namespace HWK8.Models
 
     public partial class Bid
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Bid()
+        {
+            Items = new HashSet<Item>();
+        }
+
+        public int ID { get; set; }
+
         [Required]
         [StringLength(64)]
         public string Item { get; set; }
@@ -18,9 +26,11 @@ namespace HWK8.Models
 
         public decimal Price { get; set; }
 
-        [Key]
         public DateTime Timestamp { get; set; }
 
         public virtual Buyer Buyer1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

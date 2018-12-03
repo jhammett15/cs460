@@ -22,6 +22,10 @@ namespace HWK8.Models
         [StringLength(64)]
         public string Seller { get; set; }
 
+        public int? BidID { get; set; }
+
+        public virtual Bid Bid { get; set; }
+
         public virtual Seller Seller1 { get; set; }
     }
 }
