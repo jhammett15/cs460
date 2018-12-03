@@ -64,18 +64,20 @@ GO
 ```
 
 ```sql
-DROP TABLE [dbo].[Buyers];
-DROP TABLE [dbo].[Sellers];
+
 DROP TABLE [dbo].[Items];
 DROP TABLE [dbo].[Bids];
+DROP TABLE [dbo].[Buyers];
+DROP TABLE [dbo].[Sellers];
 ```
 
-Once I added these files to the App_Data folder, I created the database. I did this by first right-clicking the App_Data folder and creating a new SQL Server database which I called Auction. I then right-clicked the .mdf file, chose open, and clicked the icon to connect to database. From there I had to manually type in the server name, which was (localdb)\MSSQLLocalDB. Once that was done my database appeared on the drop down menu for database names.
+To create the database I went into the SQL Server Object Explorer and right-clicked the Databases folder in localdb. I gave it a name and selected the location of my App_Data folder. I then right-clicked the App_Data folder in my project and clicked add existing file. I navigated to the App_Data folder again and selected the .mdf and .ldf files for the database. I was then able to connect my up and down scripts to the database and run them.
 
-Once my database was connected I went into my Up.sql file and clicked the connect icon. Under Local I chose the MSSQLLocalDB option, and selected my database from the Database Name dropdown. I was then able to connect and run my up script.
 
 ![up](images/up.PNG)
 
+![down](images/down.PNG)
+
 ## Create Models
 
-Once the database was up and running I could reverse engineer the models from it. Before I could do this I had to go download Entity Framework into my project via the Nuget package manager. I right-clicked the Models folder and selected add new item. This item was of type ADO.NET Entity Data Model
+Once the database was up and running I could reverse engineer the models from it. Before I could do this I had to go download Entity Framework into my project via the Nuget package manager. I right-clicked the Models folder and selected add new item. This item was of type ADO.NET Entity Data Model and I called it AuctionContext.
