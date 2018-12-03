@@ -30,3 +30,6 @@ This page contains the demos and journal posts for the homeworks in CS 460: Soft
 
 ### Homework 8
 - [Blog](https://jhammett15.github.io/HWK8/HWK8.html)
+
+### Homework 9
+- [Blog](https://jhammett15.github.io/HWK9/HWK9.html)

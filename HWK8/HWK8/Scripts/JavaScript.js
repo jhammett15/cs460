@@ -7,12 +7,14 @@
         type: "GET",
         dataType: "json",
         url: URL,
-        success: function () {
-
-        },
-        error: errorOnAjax
+        success: displayBids,
+        error: alert("There was an error. Try again please!")
     });
 };
+
+function displayBids() {
+
+}
 
 var interval = 1000 * 5;
 
