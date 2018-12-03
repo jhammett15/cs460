@@ -70,9 +70,7 @@ DROP TABLE [dbo].[Items];
 DROP TABLE [dbo].[Bids];
 ```
 
-Once I added these files to the App_Data folder, I created the database. I did this by first right-clicking the App_Data folder and creating a new SQL Server database which I called Auction. I then right-clicked the .mdf file, chose open, and clicked the icon to connect to database. From there I had to manually type in the server name, which was (localdb)\MSSQLLocalDB. Once that was done my database appeared on the drop down menu for database names.
-
-Once my database was connected I went into my Up.sql file and clicked the connect icon. Under Local I chose the MSSQLLocalDB option, and selected my database from the Database Name dropdown. I was then able to connect and run my up script.
+To create the database I went into the SQL Server Object explorer and right-clicked the Databases folder in localdb. I gave it a name and selected the location to by my App_data folder. I then right-clicked on the App_Data folder and clicked add existing item. I navigated to the App_data folder and selected the mdf and ldf files. I was then able to connect my up and down scripts to the database and run them. 
 
 ![up](images/up.PNG)
 
