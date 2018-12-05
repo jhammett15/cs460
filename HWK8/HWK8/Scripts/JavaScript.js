@@ -1,7 +1,7 @@
 ﻿var ajax_call = function (ID) {
     document.getElementById('ajaxArea').innerHTML = null;
 
-    var URL = "/Home/ItemDetails/" + ID;
+    var URL = "/Home/BidsResult/?id=" + ID;
 
     $ajax({
         type: "GET",

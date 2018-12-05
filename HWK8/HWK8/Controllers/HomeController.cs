@@ -140,8 +140,8 @@ namespace HWK8.Controllers
         [HttpGet]
         public JsonResult BidsResult(int id)
         {
-            
-            
+            var result = db.Items.Where(i => i.BidID == id);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         
         private AuctionVM CreateAuctionVM()
