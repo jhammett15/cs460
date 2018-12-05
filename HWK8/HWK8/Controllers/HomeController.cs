@@ -19,7 +19,8 @@ namespace HWK8.Controllers
 
         public ActionResult ItemList()
         {
-            return View(db.Items.ToList());
+            var itemList = db.Items.ToList();
+            return View(itemList);
         }
 
         [HttpGet]

@@ -18,7 +18,7 @@ CREATE TABLE [dbo].[Bids]
     [Price]         DECIMAL(10,2)               NOT NULL,
     [Timestamp]     DATETIME                    NOT NULL    DEFAULT SYSUTCDATETIME(),
     CONSTRAINT [PK_dbo.Bids] PRIMARY KEY CLUSTERED (ID ASC),
-	CONSTRAINT [FK_dbo.Bids] FOREIGN KEY (Encoding) REFERENCES dbo.Buyers(Name)
+	--CONSTRAINT [FK_dbo.Bids] FOREIGN KEY (Encoding) REFERENCES dbo.Buyers(Name)
 );
 
 CREATE TABLE [dbo].[Items]
@@ -29,8 +29,8 @@ CREATE TABLE [dbo].[Items]
     [Seller]        NVARCHAR(64)                NOT NULL,
 	[BidID]			INT,
     CONSTRAINT [PK_dbo.Items] PRIMARY KEY CLUSTERED ([ID] ASC),
-    CONSTRAINT [FK_dbo.Items] FOREIGN KEY (Seller) REFERENCES dbo.Sellers(Name),
-	CONSTRAINT [FK_dbo.Items2] FOREIGN KEY (BidID) REFERENCES dbo.Bids(ID)
+    --CONSTRAINT [FK_dbo.Items] FOREIGN KEY (Seller) REFERENCES dbo.Sellers(Name),
+	--CONSTRAINT [FK_dbo.Items2] FOREIGN KEY (BidID) REFERENCES dbo.Bids(ID)
 );
 
 INSERT INTO [dbo].[Buyers] (Name) VALUES
