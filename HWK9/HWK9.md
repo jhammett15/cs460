@@ -54,8 +54,16 @@ Then just wait for it to publish
 
 Once it is published and deployed to Azure, go to SQL databases on the Azure portal, click the name of the database to open its dashboard, and click the Show Database Connection Strings link at the top of the page. 
 
-Copy the string, go to app services, and click on the project name. Go to the application settings page and in the Connection Strings section add a new one. Set the name to be the name of your context class in your local project, and copy the connection string from the previous page there, replacing {yourusername} and {yourpassword} with the admin username and password.
+Copy the string, go to app services, and click on the project name. Go to the application settings page and in the Connection Strings section add a new one. Set the name to be the name of your context class in your local project, and copy the connection string from the previous page there, replacing {yourusername} and {yourpassword} with the admin username and password. REMEMBER TO TAKE OUT THE CURLY BRACES!
+
+Once your connection string is working on Azure, no you need to put it in your webconfig file. In the bottom of the file, or wherever the connectionStrings tag is, comment out the localdb connection strings and put in the one for Azure. It will be 
+
+```html
+<add name="AuctionContext1" connectionString="###Connection String from Azure" providerName="System.Data.SqlClient"/>
+```
+
+The String from Azure will originally say Server="", you need to change it to connectionString="".
 
 ![connectionString](images/connectionString.PNG)
 
-Your project is now viewable. You can see the URL under the app services dashboard for your database.
+Your project is now viewable. You can see the URL under the app services dashboard for your database. 

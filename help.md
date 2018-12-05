@@ -21,3 +21,4 @@
 
 - [JSON](https://www.w3schools.com/js/js_json.asp)
 
+REMEMBER THAT ANY TIME YOU MAKE A CHANGE TO YOUR LOCAL PROJECT YOU NEED TO BUILD THE PROJECT IN IIS EXPRESS AND PUBLISH TO AZURE AGAIN. Otherwise the changes will stay local.
