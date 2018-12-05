@@ -1,13 +1,13 @@
 CREATE TABLE [dbo].[Buyers]
 (
     [Name]          NVARCHAR(64)                NOT NULL,
-    PRIMARY KEY (Name)
+    CONSTRAINT [PK_dbo.Buyers] PRIMARY KEY CLUSTERED (Name ASC)
 );
 
 CREATE TABLE [dbo].[Sellers]
 (
     [Name]          NVARCHAR(64)                NOT NULL,
-    PRIMARY KEY (Name)
+    CONSTRAINT [PK_dbo.Sellers] PRIMARY KEY CLUSTERED (Name ASC)
 );
 
 CREATE TABLE [dbo].[Bids]
@@ -17,8 +17,8 @@ CREATE TABLE [dbo].[Bids]
     [Buyer]         NVARCHAR(64)                NOT NULL,
     [Price]         DECIMAL(10,2)               NOT NULL,
     [Timestamp]     DATETIME                    NOT NULL    DEFAULT SYSUTCDATETIME(),
-    PRIMARY KEY (ID),
-    FOREIGN KEY (Buyer) REFERENCES Buyers(Name)
+    CONSTRAINT [PK_dbo.Bids] PRIMARY KEY CLUSTERED (ID ASC),
+	CONSTRAINT [FK_dbo.Bids] FOREIGN KEY (Encoding) REFERENCES dbo.Buyers(Name)
 );
 
 CREATE TABLE [dbo].[Items]
@@ -29,8 +29,8 @@ CREATE TABLE [dbo].[Items]
     [Seller]        NVARCHAR(64)                NOT NULL,
 	[BidID]			INT,
     CONSTRAINT [PK_dbo.Items] PRIMARY KEY CLUSTERED ([ID] ASC),
-    FOREIGN KEY (Seller) REFERENCES Sellers(Name),
-	FOREIGN KEY (BidID) REFERENCES Bids(ID)
+    CONSTRAINT [FK_dbo.Items] FOREIGN KEY (Seller) REFERENCES dbo.Sellers(Name),
+	CONSTRAINT [FK_dbo.Items2] FOREIGN KEY (BidID) REFERENCES dbo.Bids(ID)
 );
 
 INSERT INTO [dbo].[Buyers] (Name) VALUES
